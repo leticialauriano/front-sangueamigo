@@ -1,0 +1,139 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css";
+@font-face {
+  font-family: 'SimpleLife';
+  src: url('/assets/fonts/SimpleLife.ttf') format("opentype");
+}
+
+:host {
+    background: #fff;
+    height: 100%;
+    width: 100%;
+  }
+
+  .vertical-center { 
+    display: flex;
+    align-items: center;
+  }
+
+.menu {
+    background: rgb(27, 26, 41);
+    background-size: cover;
+    border-bottom:5px solid #ffbd69;
+    height: 15%;
+    width: 100%;
+    padding-left:7%;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+
+  .text-right {
+    text-align: right;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .paw{
+    font-size: 40px;
+    color:#ffbd69;
+    padding-left:2px;
+    padding-right:2px;
+  }
+
+  .titleBody {
+    padding-top: 5%;
+    padding-left: 24%;
+    text-align: left;
+    font-size: 33px;
+    font-weight: bolder;
+    font-family: 'Trebuchet MS', sans-serif;
+    color:#ff6363;
+  }
+
+  .titleBody .paw{
+    font-size: 36px;
+    color: #3db0b1;
+  }
+
+  .bodyContent{
+    text-align: left;
+    font-weight: lighter;
+    padding-top: 3%;
+    padding-left: 25%;
+    padding-right: 25%;
+    font-size: 14px;
+    font-family: 'Trebuchet MS', sans-serif;
+    color:#202020;
+  }
+  .bodyContent .bold{
+    font-weight: bold;
+  }
+  .black-logo{
+    font-size: 24px;
+    font-family: 'SimpleLife';
+    color: #202020;
+  }
+  .black-logo .paw{
+    font-size: 24px;
+    color: #202020;
+  }
+
+   .title {
+      font-size: 24px;
+      font-family: 'SimpleLife';
+    }
+
+    .linkPage{
+      color: #3db0b1;
+    }
+
+    .linkPage a{
+      color: #3db0b1;
+      text-decoration: none;
+    }
+
+    .linkPage a:hover{
+      color: #168485;;
+    }
+
+    .logo {
+      font-size: 40px !important;
+      
+      padding-left: 5% !important;
+      }
+
+      .logo .red{
+        color:#ff6363 !important;
+      }
+
+      .logo .yellow{
+        color:#ffbd69 !important;
+      }
+
+.leftside, .rightside{
+    width: 100%;
+    height: 100vh;
+}
+
+.leftside{
+  background-color: #fff;
+text-align: center;
+}
+
+.rightside{
+  overflow-y: hidden ! important;
+  overflow-x: hidden ! important;
+  background-color: #f8f8f8;
+  background-image: url('/assets/img/sobre-nos.jpg');
+  background-size: cover;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: top right;
+  }
+  
+
+  

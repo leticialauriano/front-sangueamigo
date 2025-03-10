@@ -1,0 +1,86 @@
+<form (ngSubmit)="save()" [formGroup]="form">
+  <div fxLayout="row" fxLayoutAlign="start center" mat-dialog-title>
+    <h2 class="headline m-0" fxFlex="auto">{{modulo}} Bolsa de Sangue</h2>
+
+    <button class="text-secondary" mat-dialog-close mat-icon-button type="button">
+      <mat-icon [icIcon]="icClose"></mat-icon>
+    </button>
+  </div>
+
+  <mat-divider class="-mx-6 text-border"></mat-divider>
+
+  <mat-dialog-content fxLayout="column">
+    <div class="flex flex-col sm:flex-row">
+      <mat-form-field class="mt-6 flex-auto">
+        <mat-label>Proprietário</mat-label>
+        <mat-select formControlName="proprietarioDropDrown" required matInput (selectionChange)="onProprietarioChange($event)">
+          <mat-option *ngFor="let proprietario of proprietarios" [value]="proprietario.id">{{ proprietario.nome }} - {{ proprietario.crmvReponsavel }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+        <mat-label>Endereço</mat-label>
+        <mat-select formControlName="enderecoDropDrown" required matInput>
+          <mat-option *ngFor="let endereco of enderecos" [value]="endereco.id">{{ endereco.nome }} - {{ endereco.rua }}, {{ endereco.numero }}, {{ endereco.cidade }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="flex flex-col sm:flex-row">
+      <mat-form-field class="mt-6 flex-auto">
+        <mat-label>Animal</mat-label>
+        <mat-select id="otc-select" formControlName="animaisDropDrown" matInput>
+          <mat-option *ngFor="let a of animais" [value]="a.id">{{ a.nome }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="sm:mt-6 sm:ml-6 flex-auto">
+        <mat-label>Tipo Sanguíneo</mat-label>
+        <mat-select formControlName="tiposSanguineosDropDrown" required matInput>
+          <mat-option *ngFor="let tipo of tiposSanguineos" [value]="tipo.id">{{ tipo.nome }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="flex flex-col sm:flex-row">
+      <mat-form-field class="flex-auto">
+        <mat-label>Quantidade</mat-label>
+        <input formControlName="quantidade" type="number" matInput>
+      </mat-form-field>
+
+      <mat-form-field class="sm:ml-6 flex-auto">
+        <mat-label>Volume (ML)</mat-label>
+        <input formControlName="volume" type="number" matInput>
+      </mat-form-field>
+    </div>
+
+    <div class="flex flex-col sm:flex-row">
+      <mat-form-field class="flex-auto">
+        <mat-label>Data Validade</mat-label>
+        <input formControlName="dataValidade" (click)="dataValidadeRef.open()" (focus)="dataValidadeRef.open()"
+          [matDatepicker]="dataValidadeRef" matInput readonly>
+        <mat-datepicker-toggle [for]="dataValidadeRef" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #dataValidadeRef></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="sm:ml-6 flex-auto">
+        <mat-label>Data Coleta</mat-label>
+        <input formControlName="dataColeta" (click)="dataColetaRef.open()" (focus)="dataColetaRef.open()"
+          [matDatepicker]="dataColetaRef" matInput readonly>
+        <mat-datepicker-toggle [for]="dataColetaRef" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #dataColetaRef></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="flex-auto">
+      <mat-label>Informações Adicionais</mat-label>
+      <textarea formControlName="informacoesAdicionais" matInput></textarea>
+    </mat-form-field>
+
+    <mat-slide-toggle [checked]="false">Disponibilidade Imediata</mat-slide-toggle>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close type="button">CANCEL</button>
+    <button *ngIf="isSalvarMode()" color="primary" mat-button type="submit">SALVAR BOLSA DE SANGUE</button>
+  </mat-dialog-actions>
+</form>
