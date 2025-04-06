@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { TableColumn } from 'src/@vex/interfaces/table-column.interface';
 import { aioTableData, aioTableLabels } from 'src/static-data/aio-table-data';
+import icEdit from '@iconify/icons-ic/twotone-edit';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import icAdd from '@iconify/icons-ic/twotone-add';
 import icFilterList from '@iconify/icons-ic/twotone-filter-list';
@@ -82,7 +83,9 @@ export class ListarBolsaSangueComponent implements OnInit, AfterViewInit, OnDest
   icPhone = icPhone;
   icMail = icMail;
   icMap = icMap;
+  icEdit = icEdit;
   icSearch = icSearch;
+  
   icAdd = icAdd;
   icFilterList = icFilterList;
   icMoreHoriz = icMoreHoriz;
@@ -157,6 +160,26 @@ export class ListarBolsaSangueComponent implements OnInit, AfterViewInit, OnDest
       }
     });
   }
+
+  editarBolsaSangue(bolsaSangue: BolsaSangue) {
+    this.dialog.open(BolsaSangueSalvarAlterarComponent, {
+      data: bolsaSangue
+    }).afterClosed().subscribe(editardBolsaSangue => {
+      /**
+       * Customer is the editard bolsaSangue (if the user pressed Save - otherwise it's null)
+       */
+      if (editardBolsaSangue) {
+        /**
+         * Here we are updating our local array.
+         * You would probably make an HTTP request here.
+         */
+        const index = this.bolsasSangue.findIndex((existingBolsaSangue) => existingBolsaSangue.id === editardBolsaSangue.id);
+        this.bolsasSangue[index] = new BolsaSangue(editardBolsaSangue);
+        this.subject$.next(this.bolsasSangue);
+      }
+    });
+  }
+
 
   onFilterChange(value: string) {
     if (!this.dataSource) {
