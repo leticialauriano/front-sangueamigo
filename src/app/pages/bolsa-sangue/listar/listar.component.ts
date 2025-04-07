@@ -177,6 +177,10 @@ export class ListarBolsaSangueComponent implements OnInit, AfterViewInit, OnDest
         const index = this.bolsasSangue.findIndex((existingBolsaSangue) => existingBolsaSangue.id === editardBolsaSangue.id);
         this.bolsasSangue[index] = new BolsaSangue(editardBolsaSangue);
         this.subject$.next(this.bolsasSangue);
+        this.getData().subscribe(bolsasSangue => {
+          console.log(bolsasSangue.resultados);
+          this.subject$.next(bolsasSangue.resultados as BolsaSangue[]);
+        });
       }
     });
   }

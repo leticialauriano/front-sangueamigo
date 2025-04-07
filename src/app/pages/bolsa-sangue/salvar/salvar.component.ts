@@ -138,8 +138,8 @@ export class BolsaSangueSalvarAlterarComponent implements OnInit {
       (response: any) => {
         this.enderecos = Array.isArray(response.resultados) ? response.resultados : [];
   
-        if (this.defaults.endereco) {
-          const enderecoSelecionado = this.enderecos.find(e => e.id === this.defaults.endereco.id);
+        if (this.defaults.localizacao) {
+          const enderecoSelecionado = this.enderecos.find(e => e.id === this.defaults.localizacao.id);
   
           // Verifica se o Endereço foi encontrado
           if (enderecoSelecionado) {
