@@ -8,6 +8,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { TableColumn } from 'src/@vex/interfaces/table-column.interface';
 import { aioTableData, aioTableLabels } from 'src/static-data/aio-table-data';
 import icEdit from '@iconify/icons-ic/twotone-edit';
+import icDelete from '@iconify/icons-ic/twotone-delete';
 import icSearch from '@iconify/icons-ic/twotone-search';
 import icAdd from '@iconify/icons-ic/twotone-add';
 import icFilterList from '@iconify/icons-ic/twotone-filter-list';
@@ -85,7 +86,7 @@ export class ListarBolsaSangueComponent implements OnInit, AfterViewInit, OnDest
   icMap = icMap;
   icEdit = icEdit;
   icSearch = icSearch;
-  
+  icDelete = icDelete;
   icAdd = icAdd;
   icFilterList = icFilterList;
   icMoreHoriz = icMoreHoriz;
@@ -179,7 +180,6 @@ export class ListarBolsaSangueComponent implements OnInit, AfterViewInit, OnDest
       }
     });
   }
-
 
   onFilterChange(value: string) {
     if (!this.dataSource) {

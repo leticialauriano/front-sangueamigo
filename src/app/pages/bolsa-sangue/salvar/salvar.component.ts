@@ -49,7 +49,8 @@ export class BolsaSangueSalvarAlterarComponent implements OnInit {
       animaisDropDrown: ['', Validators.required],
       tiposSanguineosDropDrown: ['', Validators.required],
       enderecoDropDrown: ['', Validators.required],
-      proprietarioDropDrown: ['', Validators.required]
+      proprietarioDropDrown: ['', Validators.required],
+      disponibilidadeImediata: ['', Validators.required]
     });
 
     // Carregar dados iniciais de animais, tipos sanguíneos, e proprietários
@@ -98,57 +99,10 @@ export class BolsaSangueSalvarAlterarComponent implements OnInit {
     this.loadEnderecos(proprietarioId);
   }
 
-  // Função para carregar os endereços do proprietário
-  loadEnderecos(proprietarioId: string) {
-    // Verifica se o ID do Proprietário está presente
-    if (!proprietarioId) {
-      console.error('ID do Proprietário não fornecido!');
-      return;
-    }
-  
-    // Carregar os endereços do Proprietário
-    this.http.get(`http://localhost:5001/proprietario/${proprietarioId}/enderecos`).subscribe(
-      (response: any) => {
-        this.enderecos = Array.isArray(response.resultados) ? response.resultados : [];
-        
-        if (this.defaults.endereco) {
-          const enderecoSelecionado = this.enderecos.find(e => e.id === this.defaults.endereco.id);
-          
-          // Verifica se o Endereço foi encontrado
-          if (enderecoSelecionado) {
-            this.form.patchValue({
-              enderecoDropDrown: enderecoSelecionado.id
-            });
-          } else {
-            console.error('Endereço não encontrado');
-          }
-        }
-      },
-      (error) => {
-        console.error('Erro ao carregar os Endereços:', error);
-      }
-    );
-  }
-
-  // Função para carregar os animais
-  loadAnimais() {
-    this.http.get('http://localhost:5002/Animais').subscribe((response: any) => {
-      this.animais = Array.isArray(response.resultados) ? response.resultados : [];
-    });
-  }
-
-  // Função para carregar os tipos sanguíneos
-  loadTiposSanguineos() {
-    this.http.get('http://localhost:5002/TiposBolsaSangues').subscribe((response: any) => {
-      this.tiposSanguineos = Array.isArray(response.resultados) ? response.resultados : [];
-    });
-  }
-
-  // Função para carregar o Proprietário e Endereço caso esteja editando
   loadProprietarioEEnderecos(proprietarioId: string) {
     if (!proprietarioId) {
       console.error('Proprietário ID não fornecido!');
-      return; // Sai da função se o ID do proprietário não estiver presente.
+      return;
     }
   
     // Carregar Proprietário
@@ -173,6 +127,49 @@ export class BolsaSangueSalvarAlterarComponent implements OnInit {
       }
     );
   }
+  
+  loadEnderecos(proprietarioId: string) {
+    if (!proprietarioId) {
+      console.error('ID do Proprietário não fornecido!');
+      return;
+    }
+  
+    this.http.get(`http://localhost:5001/proprietario/${proprietarioId}/enderecos`).subscribe(
+      (response: any) => {
+        this.enderecos = Array.isArray(response.resultados) ? response.resultados : [];
+  
+        if (this.defaults.endereco) {
+          const enderecoSelecionado = this.enderecos.find(e => e.id === this.defaults.endereco.id);
+  
+          // Verifica se o Endereço foi encontrado
+          if (enderecoSelecionado) {
+            this.form.patchValue({
+              enderecoDropDrown: enderecoSelecionado.id
+            });
+          } else {
+            console.error('Endereço não encontrado');
+          }
+        }
+      },
+      (error) => {
+        console.error('Erro ao carregar os Endereços:', error);
+      }
+    );
+  }
+  // Função para carregar os animais
+  loadAnimais() {
+    this.http.get('http://localhost:5002/Animais').subscribe((response: any) => {
+      this.animais = Array.isArray(response.resultados) ? response.resultados : [];
+    });
+  }
+
+  // Função para carregar os tipos sanguíneos
+  loadTiposSanguineos() {
+    this.http.get('http://localhost:5002/TiposBolsaSangues').subscribe((response: any) => {
+      this.tiposSanguineos = Array.isArray(response.resultados) ? response.resultados : [];
+    });
+  }
+
 
   // Função para salvar a bolsa de sangue
   save() {
