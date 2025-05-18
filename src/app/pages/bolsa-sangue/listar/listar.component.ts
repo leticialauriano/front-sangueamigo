@@ -185,6 +185,34 @@ export class ListarBolsaSangueComponent implements OnInit, AfterViewInit, OnDest
     });
   }
 
+  deletarBolsaSangue(bolsaSangue: BolsaSangue) {
+    // Primeiro, envie a requisição DELETE para a API
+    this.http.delete(`http://localhost:5002/BolsaSangue/${bolsaSangue.id}`).subscribe(
+      (response) => {
+        // Se a requisição for bem-sucedida, remova a bolsa de sangue localmente
+        const index = this.bolsasSangue.findIndex((existingBolsaSangue) => existingBolsaSangue.id === bolsaSangue.id);
+        if (index >= 0) {
+          this.bolsasSangue.splice(index, 1);
+          this.selection.deselect(bolsaSangue);
+          this.subject$.next(this.bolsasSangue);  // Atualiza a lista na UI
+        }
+      },
+      (error) => {
+        // Caso haja um erro na requisição, exiba uma mensagem de erro
+        console.error('Erro ao deletar a bolsa de sangue:', error);
+        // Aqui você pode mostrar uma mensagem de erro na interface se necessário
+      }
+    );
+  }
+
+  deletarBolsasSangue(bolsasSangue: BolsaSangue[]) {
+    /**
+     * Here we are updating our local array.
+     * You would probably make an HTTP request here.
+     */
+    bolsasSangue.forEach(c => this.deletarBolsaSangue(c));
+  }
+
   onFilterChange(value: string) {
     if (!this.dataSource) {
       return;
