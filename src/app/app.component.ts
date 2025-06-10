@@ -65,6 +65,12 @@ export class AppComponent {
         route: '/sistema/bolsa-sangue/listar',
         icon: icBlood,
         type: 'link'
+      },
+      {
+        label: 'Proprietários',
+        route: '/sistema/proprietario/listar',
+        icon: icPerson,
+        type: 'link'
       }
     ];
   }

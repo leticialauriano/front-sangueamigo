@@ -18,7 +18,11 @@ const routes: Routes = [
       {
         path: 'bolsa-sangue',
         loadChildren: () => import('./pages/bolsa-sangue/bolsa-sangue.module').then(m => m.BolsaSangueModule),
-      }
+      },
+      {
+        path: 'proprietario',
+        loadChildren: () => import('./pages/proprietario/proprietario.module').then(m => m.ProprietarioModule),
+      },
     ]
   },
 ];
